@@ -5,9 +5,13 @@ using UnityEngine;
 public class ButtonHandler : MonoBehaviour
 {
     public GameObject capsuleObject;
-    // Start is called before the first frame update
-    public void tp_to_middle()
+    private Vector2 startLocation;
+    
+    public void Start(){
+        startLocation = capsuleObject.transform.position;
+    }
+    public void tp_to_start()
     {
-        capsuleObject.transform.position = new Vector2(0,0);
+        capsuleObject.transform.position = startLocation;
     }
 }
