@@ -1,37 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class ChangeBG : MonoBehaviour
+public class ChangeBackground : MonoBehaviour
 {
     [SerializeField]
     private Camera cam;
+    private bool checkbox = false;
+
     private float elapsedTime;
-    [SerializeField]
-    private Toggle toggle;
 
     void Start()
     {
         cam = GetComponent<Camera>();
-        toggle = toggle.GetComponent<Toggle>();
     }
 
-    void Update()
-    {
-        elapsedTime++;
-        if (toggle.isOn && elapsedTime > 1000){
-            change_background();
-        }
-    }
-    public void change_background()
+    public void changeColor()
     {
         cam.backgroundColor = Random.ColorHSV(0f, 1f, 1f, 1f);
     }
 
-    public void toggle_background()
+    public void toggleCycleColor()
     {
-        toggle.isOn = !toggle.isOn;
+        checkbox = !checkbox;
     }
+    void Update()
+    {
+        elapsedTime += Time.deltaTime;
+        if (checkbox && elapsedTime >= 2)
+        {
+            changeColor();
+            elapsedTime = 0f;
+        }
+    }
+
 }
